@@ -2,6 +2,7 @@
 
 {% import "bootstrap/utils.html" as utils %}
 
+
 {% block content %}
     <div class="container ">
         {%- with messages = get_flashed_messages(with_categories=True) %}
@@ -18,8 +19,8 @@
             <p>O que gostaria de fazer?</p>
             <div class="list-group">
                 <a href="{{ url_for('index.show', id=1) }}" class="list-group-item list-group-item-action">Consultar conta</a>
-                <a href="#" class="list-group-item list-group-item-action">Consultar faturas</a>
-                <a href="#" class="list-group-item list-group-item-action">Inserir compra</a>
+                <a href="{{ url_for('index.sales', id=1) }}" class="list-group-item list-group-item-action">Consultar faturas</a>
+                <a href="{{ url_for('index.showinsert', id=1) }}" class="list-group-item list-group-item-action">Inserir compra</a>
                 <a href="#" class="list-group-item list-group-item-action">Sair</a>
             </div>
         </div>

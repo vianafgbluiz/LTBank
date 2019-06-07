@@ -21,26 +21,26 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputName">Agência</label>
-                        <input disabled=disabled type="text" class="form-control" id="inputName" value="1311">
+                        <input disabled=disabled type="text" class="form-control" id="inputName" value="{{ account['ds_agency'] }}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputEmail">Conta</label>
-                        <input type="email" disabled=disabled class="form-control" id="inputEmail" value="00320-1">
+                        <input type="email" disabled=disabled class="form-control" id="inputEmail" value="{{ account['ds_account'] }}-{{ account['ds_digit'] }}">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputName">Cartão</label>
-                        <input disabled=disabled type="text" class="form-control" id="inputName" value="**** **** **** 0001">
+                        <input disabled=disabled type="text" class="form-control" id="inputName" value="**** **** **** {{ account['ds_card'][-4:] }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputEmail">Codigo de segurança</label>
-                        <input type="email" disabled=disabled class="form-control"id="inputEmail" value="**0">
+                        <input type="email" disabled=disabled class="form-control"id="inputEmail" value="{{ account['ds_security'] }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputEmail">Data de Validade</label>
-                        <input type="email" disabled=disabled class="form-control" id="inputEmail" value="06/21">
+                        <input type="email" disabled=disabled class="form-control" id="inputEmail" value="{{ account['dt_validate'] }}">
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputAddress">Endereço</label>
-                        <input type="text" class="form-control" id="inputAddress" disabled=disabled value="Rua das Petunias, 499">
+                        <input type="text" class="form-control" id="inputAddress" disabled=disabled value="{{ address['nm_local'] }}">
                     </div>
                 </div>
 
@@ -92,20 +92,20 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" id="inputBairro" disabled="disabled" value="Cidade Jardim">
+                        <input type="text" class="form-control" id="inputBairro" disabled="disabled" value="{{ address['nm_bairro'] }}">
                     </div>
                     <div class="form-group col-md-5">
                         <label for="inputCity">Cidade</label>
-                        <input type="text" class="form-control" id="inputCity" disabled="disabled" value="Uberlândia">
+                        <input type="text" class="form-control" id="inputCity" disabled="disabled" value="{{ address['nm_city'] }}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputState">Estado</label>
                         <select id="inputState" class="form-control" disabled="disabled">
-                            <option>MG</option>
+                            <option>{{ address['nm_state'] }}</option>
                         </select>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Voltar</button>
+                <a type="button" href="javascript:history.back()" class="btn btn-primary">Voltar</a>
             </form>
         </div>
     </div>
