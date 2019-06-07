@@ -18,10 +18,10 @@
             <h1>Bem-vindo, {{ user['nm_name'] }}</h1>
             <p>O que gostaria de fazer?</p>
             <div class="list-group">
-                <a href="{{ url_for('index.show', id=1) }}" class="list-group-item list-group-item-action">Consultar conta</a>
-                <a href="{{ url_for('index.sales', id=1) }}" class="list-group-item list-group-item-action">Consultar faturas</a>
-                <a href="{{ url_for('index.showinsert', id=1) }}" class="list-group-item list-group-item-action">Inserir compra</a>
-                <a href="#" class="list-group-item list-group-item-action">Sair</a>
+                <a href="{{ url_for('index.show', id=user['id']) }}" class="list-group-item list-group-item-action">Consultar conta</a>
+                <a href="{{ url_for('index.sales', id=user['id']) }}" class="list-group-item list-group-item-action">Consultar faturas</a>
+                <a href="{{ url_for('index.showinsert', id=user['id']) }}" class="list-group-item list-group-item-action">Inserir compra</a>
+                <a href="javascript:history.back()" class="list-group-item list-group-item-action">Sair</a>
             </div>
         </div>
     </div>

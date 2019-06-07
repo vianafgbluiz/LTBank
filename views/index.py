@@ -253,7 +253,7 @@ def sales(id):
         if d['vn_dividers'] == 1:
             valor_parcela = d['vn_total']
         else:
-            valor_parcela = d['vn_total']/d['vn_dividers']
+            valor_parcela = round(d['vn_total']/d['vn_dividers'], 2)
 
         if data.day > 5:
             print("Maior que 5")
@@ -305,7 +305,6 @@ def insertsale(id):
     except:
         print("Problemas ao Inserir!")
         return render_template("error.html")
-
 
 
 @index_blueprint.route("/login", methods=['GET'])
