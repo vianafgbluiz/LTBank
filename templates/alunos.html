@@ -1,0 +1,22 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+  <div class="container">
+  <h3>Por favor, preencha os dados corretamente!</h3>
+  <p>Relaxa que vai dar Brasil!</p>
+  <div class="row">
+      <div class="col-6">
+          <h1>EU TO APRENDENDO AINDA</h1>
+      </div>
+      <div class="col-6">
+          <h2>EU JA APRENDI AGORA</h2>
+      </div>
+  </div>
+  
+
+<hr>
+{{ wtf.quick_form(form) }}
+<hr>
+<p>Copyright 2017 <a href="http://www.google.com">LT Solutions</a></p>
+</div>
+{% endblock %}

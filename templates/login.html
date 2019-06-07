@@ -1,0 +1,36 @@
+{%- extends "base.html" %}
+
+{% import "bootstrap/utils.html" as utils %}
+
+{% block content %}
+    <div class="container ">
+        {%- with messages = get_flashed_messages(with_categories=True) %}
+            {%- if messages %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{utils.flashed_messages(messages)}}
+                    </div>
+                </div>
+            {%- endif %}
+        {%- endwith %}
+        <div style="background:rgba(255,31,9,0.2) !important" class="jumbotron">
+            <h1>Acesse o LTBank</h1>
+            <br/>
+            <p>Entre com suas credenciais</p>
+            <form action="http://127.0.0.1:5000/loginuser" method="post">
+                <!-- Group: CPF e Senha -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCPF">CPF</label>
+                        <input type="text" class="form-control" name="inputCPF" id="inputCPF" placeholder="CPF">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputSenha">Senha</label>
+                        <input type="password" class="form-control" name="inputSenha" id="inputSenha" placeholder="Telefone">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+        </div>
+    </div>
+{%- endblock %}

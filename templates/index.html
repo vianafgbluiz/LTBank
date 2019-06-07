@@ -1,0 +1,116 @@
+{%- extends "base.html" %}
+
+{% import "bootstrap/utils.html" as utils %}
+
+{% block content %}
+    <div class="container ">
+        {%- with messages = get_flashed_messages(with_categories=True) %}
+            {%- if messages %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{utils.flashed_messages(messages)}}
+                    </div>
+                </div>
+            {%- endif %}
+        {%- endwith %}
+        <div style="background:rgba(255,31,9,0.2) !important" class="jumbotron">
+            <h1>Bem-vindo ao LTBank</h1>
+            <br/>
+            <p>Aqui você tem tudo de forma digital! Vamos começar?</p>
+            <form action="http://127.0.0.1:5000/insertuser" method="post">
+                <!-- Group: Name -->
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputName">Nome Completo</label>
+                        <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Nome" autofocus>
+                    </div>
+                </div>
+
+                <!-- Group: Email e Senha -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputSenha">Senha (4 dígitos)</label>
+                        <input type="password" class="form-control" name="inputSenha" id="inputSenha" placeholder="Senha">
+                    </div>
+                </div>
+
+                <!-- Group: CPF e Senha -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCPF">CPF</label>
+                        <input type="text" class="form-control" name="inputCPF" id="inputCPF" placeholder="CPF">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Telefone</label>
+                        <input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Telefone">
+                    </div>
+                </div>
+
+                <!-- Group: Endereço -->
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputAddress">Endereço</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+                </div>
+
+                <!-- Group: Bairro, Cidade, Estado -->
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputBairro">Bairro</label>
+                        <input type="text" class="form-control" id="inputBairro">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputCity">Cidade</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputState">Estado</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Selecione...</option>
+                            <option>AC</option>
+                            <option>AL</option>
+                            <option>AP</option>
+                            <option>AM</option>
+                            <option>BA</option>
+                            <option>CE</option>
+                            <option>DF</option>
+                            <option>ES</option>
+                            <option>GO</option>
+                            <option>MA</option>
+                            <option>MT</option>
+                            <option>MS</option>
+                            <option>MG</option>
+                            <option>PA</option>
+                            <option>PB</option>
+                            <option>PR</option>
+                            <option>PE</option>
+                            <option>PI</option>
+                            <option>RJ</option>
+                            <option>RN</option>
+                            <option>RS</option>
+                            <option>RO</option>
+                            <option>RR</option>
+                            <option>SC</option>
+                            <option>SP</option>
+                            <option>SE</option>
+                            <option>TO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">Aceito os termos do Contrato!</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+{%- endblock %}
