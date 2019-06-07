@@ -13,35 +13,24 @@ import hashlib
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 from sqlalchemy import text, select, ForeignKey
 
+# Inicializando
 index_blueprint = Blueprint('index', __name__)
 
 from .nav import nav, ExtendedNavbar
 
 nav.register_element('index_top', ExtendedNavbar(
-    #title=View('Modbus Sniffer1', '.index'),
     title='LTBank',
     root_class='navbar navbar-inverse',
     items=(
         View('Home', '.index'),
         View('Login', '.login'),
-        #View('Debug-Info', 'bootstrap.static'),
-        Subgroup(
-            'Docs1',
-            Link('Flask-Bootstrap1', 'http://pythonhosted.org/Flask-Bootstrap'),
-            Separator(),
-            Text('Bootstrap'),
-            Link('Getting started', 'http://getbootstrap.com/getting-started/'),
-            Link('CSS', 'http://getbootstrap.com/css/'),
-            Link('Components', 'http://getbootstrap.com/components/'),
-            Link('Javascript', 'http://getbootstrap.com/javascript/'),
-        ),
     )
 ))
 
 # ------------------------------------ ORM --------------------------------------------
 db = create_engine("postgresql+psycopg2://postgres:banco@localhost/ltbank")
 
-metadados = MetaData()
+metadados = MetaData(schema="banklt_desnv")
 
 users = Table('lt_users', metadados,
                Column('id',Integer,primary_key=True),
@@ -60,6 +49,7 @@ addresses = Table('lt_addresses', metadados,
                     Column('user_id', Integer, ForeignKey('lt_users.id')))
 
 
+
 conn = db.connect()
 # -------------------------------------------------------------------------------------
 
@@ -76,6 +66,7 @@ def index():
 def veioaqui():
     if request.form:
         senha = hashlib.md5(bytes(request.form['inputSenha'], "ascii"))
+
         conn.execute(users.insert(), [
             {
                 'nm_name': request.form['inputName'],
@@ -87,20 +78,83 @@ def veioaqui():
             }
         ])
 
-
         return render_template('authenticated.html')
     return render_template('index.html')
-
-@index_blueprint.route("/loginuser", methods=['POST'])
-def loginuser():
-    if request.form:
-        senha = hashlib.md5(bytes(request.form['inputSenha'], "ascii"))
-        select_command = select([users]).where(users.cpf == request.form['inputCPF'])
 
 @index_blueprint.route("/login", methods=['GET'])
 def login():
     return render_template('login.html')
 
+@index_blueprint.route("/loginuser", methods=['POST'])
+def loginuser():
+    if request.form:
+        # Variaveis
+        senha = hashlib.md5(bytes(request.form['inputSenha'], "ascii"))
+
+        # Comandos DB
+        select_command = select([users]).where(users.c.nm_cpf == request.form['inputCPF'])
+        result = conn.execute(select_command)
+
+        for row in result:
+            if row['nm_password'] == senha.hexdigest():
+                return redirect(url_for('index.user', id=str(row['id'])))
+
+    return render_template("error.html")
+
+
+@index_blueprint.route("/user/<id>", methods=["GET"])
+def user(id):
+    # Comandos DB
+    select_command = select([users]).where(users.c.id == id)
+    result = conn.execute(select_command)
+
+    for row in result:
+        user = row
+        return render_template("authenticated.html", user=user)
+
+    return render_template("error.html")
+
+@index_blueprint.route("/user/<id>/show", methods=['GET'])
+def show(id):
+    # Comandos DB
+    select_command = select([users]).where(users.c.id == id)
+    result = conn.execute(select_command)
+
+    for row in result:
+        user = row
+        return render_template("show.html", user=user)
+
+    return render_template("error.html")
+
+@index_blueprint.route("/user/<id>/sales", methods=['GET'])
+def sales(id):
+    query = "SELECT * FROM banklt_desnv.lt_sales WHERE account_id = 1"
+
+    result = conn.execute(query)
+
+    for row in result:
+        print(row)
+
+    result = [1,2,3,4,5]
+
+    return render_template("fatura.html", sales=result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Exemplos antigos
 
 @index_blueprint.route("/teste", methods=['GET', 'POST'])
 def teste():
