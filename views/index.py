@@ -177,8 +177,7 @@ def veioaqui():
                         'nm_bairro': request.form['inputBairro'],
                         'nm_city': request.form['inputCity'],
                         'nm_state': request.form['inputState'],
-                        'user_id': user['id'],
-                        'fl_active': 1
+                        'user_id': user['id']
                     }
                 ])
                 conn.execute(accounts.insert(), [
