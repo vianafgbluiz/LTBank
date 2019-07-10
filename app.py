@@ -7,7 +7,10 @@ from views.nav import nav, init_custom_nav_renderer
 
 application = Flask(__name__)
 application.register_blueprint(index_blueprint)
-application.config['SECRET_KEY'] = 'secret'
 Bootstrap(application)
 nav.init_app(application)
 init_custom_nav_renderer(application)
+
+
+if __name__ == "__main__":
+    application.run(host='0.0.0.0',port=5000)

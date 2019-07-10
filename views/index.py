@@ -32,7 +32,7 @@ nav.register_element('index_top', ExtendedNavbar(
 ))
 
 # ------------------------------------ ORM --------------------------------------------
-db = create_engine("postgresql+psycopg2://postgres:banco@localhost/ltbank")
+db = create_engine("postgresql+psycopg2://postgres:postgres@database/asa")
 
 metadados = MetaData(schema="banklt_desnv")
 
